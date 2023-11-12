@@ -23,14 +23,17 @@ Route::get('/', function () {
 Route::get('ruangan', [RuanganController::class, 'view']);
 Route::get('ruangan/create', [RuanganController::class, 'create']);
 Route::post('ruangan/create', [RuanganController::class, 'create']);
+Route::get('ruangan/update', [RuanganController::class, 'update']);
+Route::post('ruangan/update', [RuanganController::class, 'update']);
 Route::get('ruangan/delete', [RuanganController::class, 'delete']);
 
 Route::get('booking', [BookingController::class, 'view']);
-// Route::get('booking/create', [BookingController::class, 'create']);
+Route::get('booking/create', [BookingController::class, 'create']);
 Route::post('booking/create', [BookingController::class, 'create']);
 Route::get('booking/delete', [BookingController::class, 'delete']);
 
 Route::get('history', [BookingController::class, 'history']);
+Route::get('history/delete', [BookingController::class, 'historyDelete']);
 
 
 Auth::routes();

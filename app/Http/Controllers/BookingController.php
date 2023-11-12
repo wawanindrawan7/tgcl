@@ -16,28 +16,38 @@ class BookingController extends Controller
         return view('booking.view', compact('ruangan', 'booking'));
     }
 
+
+
     public function create(Request $r)
     {
 
-        Booking::create([
-            'nama' => $r->nama,
-            'tgl_booking' => $r->tgl_booking,
-            'mulai' => $r->mulai,
-            'selesai' => $r->selesai,
-            'ruangan_id' => $r->ruangan_id
-        ]);
+        if ($r->method() == "GET") {
+            $ruangan = Ruangan::find($r->id);
+            return view('booking.create', compact('ruangan'));
+        } else {
+            Booking::create([
+                'nama' => $r->nama,
+                'tgl_booking' => $r->tgl_booking,
+                'jumlah' => $r->jumlah,
+                'mulai' => $r->mulai,
+                'selesai' => $r->selesai,
+                'ruangan_id' => $r->ruangan_id
+            ]);
 
-        History::create([
-            'nama' => $r->nama,
-            'tgl_booking' => $r->tgl_booking,
-            'mulai' => $r->mulai,
-            'selesai' => $r->selesai,
-            'ruangan_id' => $r->ruangan_id
-        ]);
+            History::create([
+                'nama' => $r->nama,
+                'tgl_booking' => $r->tgl_booking,
+                // 'jumlah' => $r->jumlah,
+                'mulai' => $r->mulai,
+                'selesai' => $r->selesai,
+                'ruangan_id' => $r->ruangan_id
+            ]);
 
 
-        return redirect()->to('booking');
+            return redirect()->to('booking');
+        }
     }
+
 
     public function delete(Request $r)
     {
@@ -50,5 +60,12 @@ class BookingController extends Controller
     {
         $history = History::all();
         return view('history.view', compact('history'));
+    }
+
+    public function historyDelete(Request $r)
+    {
+        $h = History::find($r->id);
+        $h->delete();
+        return redirect()->to('history');
     }
 }

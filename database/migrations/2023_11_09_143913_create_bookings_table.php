@@ -21,7 +21,7 @@ class CreateBookingsTable extends Migration
             $table->string('mulai');
             $table->string('selesai');
             $table->unsignedBigInteger('ruangan_id');
-            $table->foreign('ruangan_id')->references('id')->on('ruangans');
+            $table->foreign('ruangan_id')->references('id')->on('ruangans')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

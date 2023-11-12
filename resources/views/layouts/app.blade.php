@@ -47,19 +47,7 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
-                        <li>
-                            <a href="{{ url('ruangan') }}">Ruangan</a>
-                        </li>
-                        <li>
 
-                            <a href="{{ url('booking') }}">Booking</a>
-
-                        </li>
-                        <li>
-                            <a href="{{ url('history') }}">History Booking</a>
-                        </li>
-                    </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">

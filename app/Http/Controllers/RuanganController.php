@@ -16,6 +16,7 @@ class RuanganController extends Controller
     public function create(Request $r)
     {
         if ($r->method() == "GET") {
+
             return view('ruangan.create');
         } else {
             $ruangan = Ruangan::create([
@@ -28,6 +29,27 @@ class RuanganController extends Controller
             }
         }
     }
+
+    public function update(Request $r)
+    {
+        if ($r->method() == "GET") {
+            $ruangan = Ruangan::find($r->id);
+            return view('ruangan.edit', compact('ruangan'));
+        } else {
+            // update code
+            $ruangan = Ruangan::find($r->id);
+            $ruangan->update([
+                'nama' => $r->nama,
+                'jumlah' => $r->jumlah
+            ]);
+
+
+            if ($ruangan) {
+                return redirect()->to('ruangan');
+            }
+        }
+    }
+
 
     public function delete(Request $r)
     {
