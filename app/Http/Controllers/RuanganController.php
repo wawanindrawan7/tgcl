@@ -16,7 +16,12 @@ class RuanganController extends Controller
     public function create(Request $r)
     {
         if ($r->method() == "GET") {
-
+            $jam_list = [];
+            $time = date('H:i:s', strtotime('06:00'));
+            for ($i = 0; $i < 16; $i++) {
+                $time = date('H:i:s', strtotime($time . " +1 hour"));
+                array_push($jam_list, $time);
+            }
             return view('ruangan.create');
         } else {
             $ruangan = Ruangan::create([

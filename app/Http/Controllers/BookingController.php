@@ -6,13 +6,15 @@ use App\Models\Booking;
 use App\Models\History;
 use App\Models\Ruangan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 
 class BookingController extends Controller
 {
     public function view()
     {
         $ruangan = Ruangan::all();
-        $booking = Booking::all()->sortByDesc("mulai");
+        $booking = Booking::all();
         return view('booking.view', compact('ruangan', 'booking'));
     }
 
@@ -22,30 +24,57 @@ class BookingController extends Controller
     {
 
         if ($r->method() == "GET") {
+            $data = json_decode($r->id);
             $ruangan = Ruangan::find($r->id);
-            return view('booking.create', compact('ruangan'));
-        } else {
-            Booking::create([
-                'nama' => $r->nama,
-                'tgl_booking' => $r->tgl_booking,
-                'jumlah' => $r->jumlah,
-                'mulai' => $r->mulai,
-                'selesai' => $r->selesai,
-                'ruangan_id' => $r->ruangan_id
-            ]);
 
-            History::create([
-                'nama' => $r->nama,
-                'tgl_booking' => $r->tgl_booking,
-                // 'jumlah' => $r->jumlah,
-                'mulai' => $r->mulai,
-                'selesai' => $r->selesai,
-                'ruangan_id' => $r->ruangan_id
-            ]);
+            return view('booking.create', compact('ruangan', 'data'));
+        } else {
+            // Booking::create([
+            //     'nama' => $r->nama,
+            //     'tgl_booking' => $r->tgl_booking,
+            //     'jumlah' => $r->jumlah,
+            //     'mulai' => $r->mulai,
+            //     'selesai' => $r->selesai,
+            //     'ruangan_id' => $r->ruangan_id
+            // ]);
+
+            // History::create([
+            //     'nama' => $r->nama,
+            //     'tgl_booking' => $r->tgl_booking,
+            //     // 'jumlah' => $r->jumlah,
+            //     'mulai' => $r->mulai,
+            //     'selesai' => $r->selesai,
+            //     'ruangan_id' => $r->ruangan_id
+            // ]);
 
 
             return redirect()->to('booking');
         }
+    }
+
+    public function pesan($kursi, $data, Request $r)
+    {
+        $d = Crypt::decrypt($data);
+        // $huruf = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+        // $kodePemesanan = strtoupper(substr(str_shuffle($huruf), 0, 7));
+
+        Booking::create([
+            'nama' => Auth::user()->name,
+            'kursi' => $kursi,
+            'status' => 0
+        ]);
+
+        return redirect('/booking');
+    }
+
+    public function approve(Request $r)
+    {
+        $booking = Booking::find($r->id);
+        $booking->update([
+            'status' => 1
+        ]);
+
+        return redirect('/booking');
     }
 
 

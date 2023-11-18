@@ -16,12 +16,8 @@ class CreateBookingsTable extends Migration
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-            $table->string('tgl_booking');
-            $table->double('jumlah');
-            $table->string('mulai');
-            $table->string('selesai');
-            $table->unsignedBigInteger('ruangan_id');
-            $table->foreign('ruangan_id')->references('id')->on('ruangans')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('kursi');
+            $table->string('status');
             $table->timestamps();
         });
     }

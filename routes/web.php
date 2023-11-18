@@ -31,6 +31,9 @@ Route::get('booking', [BookingController::class, 'view']);
 Route::get('booking/create', [BookingController::class, 'create']);
 Route::post('booking/create', [BookingController::class, 'create']);
 Route::get('booking/delete', [BookingController::class, 'delete']);
+Route::get('booking/approve', [BookingController::class, 'approve']);
+Route::get('/booking/{kursi}/{data}', [BookingController::class, 'pesan'])->name('pesan');
+
 
 Route::get('history', [BookingController::class, 'history']);
 Route::get('history/delete', [BookingController::class, 'historyDelete']);
