@@ -13,6 +13,8 @@
                                     <th>No</th>
                                     <th>Nama Ruangan</th>
                                     <th>Jumlah Kursi</th>
+                                    <th>Jam Mulai</th>
+                                    <th>Jam Selesai</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -22,6 +24,9 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $item->nama }}</td>
                                         <td>{{ $item->jumlah }} Kursi</td>
+                                        <td>{{ $item->jam_mulai }}</td>
+                                        <td>{{ $item->jam_selesai }}</td>
+
                                         <td>
                                             <a href="{{ url('ruangan/update?id=') . $item->id }}"
                                                 class="btn btn-warning">Edit</a>

@@ -18,6 +18,8 @@ class CreateBookingsTable extends Migration
             $table->string('nama');
             $table->string('kursi');
             $table->string('status');
+            $table->unsignedBigInteger('ruangan_id');
+            $table->foreign('ruangan_id')->references('id')->on('ruangans')->onDelete('cascade');
             $table->timestamps();
         });
     }

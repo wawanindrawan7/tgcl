@@ -68,7 +68,9 @@
                                         <th>No</th>
                                         <th>Nama Yang Booking</th>
                                         <th>Status Booking</th>
-                                        <th>Action</th>
+                                        @if (Auth::user()->role == 'Admin')
+                                            <th>Action</th>
+                                        @endif
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -83,10 +85,13 @@
                                                     <span class="btn btn-warning">Menunggu Verifikasi Admin</span>
                                                 @endif
                                             </td>
-                                            <td>
-                                                <a href="{{ url('booking/approve?id=') . $item->id }}"
-                                                    class="btn btn-danger">Approve</a>
-                                            </td>
+                                            @if (Auth::user()->role == 'Admin')
+                                                <td>
+                                                    <a href="{{ url('booking/approve?id=') . $item->id }}"
+                                                        class="btn btn-danger">Approve</a>
+                                                </td>
+                                            @endif
+
                                         </tr>
                                     @endforeach
                                 </tbody>

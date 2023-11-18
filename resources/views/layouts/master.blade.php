@@ -81,24 +81,40 @@
             <!-- partial:../../partials/_sidebar.html -->
             <nav class="sidebar sidebar-offcanvas" id="sidebar">
                 <ul class="nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url('home') }}">
-                            <i class="icon-grid menu-icon"></i>
-                            <span class="menu-title">Dashboard</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url('ruangan') }}">
-                            <i class="icon-grid menu-icon"></i>
-                            <span class="menu-title">Ruangan</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url('booking') }}">
-                            <i class="icon-grid menu-icon"></i>
-                            <span class="menu-title">Booking</span>
-                        </a>
-                    </li>
+
+                    @if (Auth::user()->role == 'Admin')
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('home') }}">
+                                <i class="icon-grid menu-icon"></i>
+                                <span class="menu-title">Dashboard</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('ruangan') }}">
+                                <i class="icon-grid menu-icon"></i>
+                                <span class="menu-title">Sesi</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('booking') }}">
+                                <i class="icon-grid menu-icon"></i>
+                                <span class="menu-title">Booking</span>
+                            </a>
+                        </li>
+                    @else
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('home') }}">
+                                <i class="icon-grid menu-icon"></i>
+                                <span class="menu-title">Dashboard</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('booking') }}">
+                                <i class="icon-grid menu-icon"></i>
+                                <span class="menu-title">Booking</span>
+                            </a>
+                        </li>
+                    @endif
                     {{-- <li class="nav-item">
                         <a class="nav-link" href="{{ url('history') }}">
                             <i class="icon-grid menu-icon"></i>

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Ruangan extends Model
 {
     use HasFactory;
-    protected $fillable = ['nama', 'jumlah'];
+    protected $guarded = [];
 
     public function booking($id)
     {
