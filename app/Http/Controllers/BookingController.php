@@ -62,7 +62,6 @@ class BookingController extends Controller
             'nama' => Auth::user()->name,
             'kursi' => $kursi,
             'status' => 0,
-            'ruangan_id' => 1
         ]);
 
         return redirect('/booking');
