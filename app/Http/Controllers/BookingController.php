@@ -52,16 +52,13 @@ class BookingController extends Controller
         }
     }
 
-    public function pesan($kursi, $data, Request $r)
+    public function pesan($kursi, $data)
     {
-        $d = Crypt::decrypt($data);
-        // $huruf = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
-        // $kodePemesanan = strtoupper(substr(str_shuffle($huruf), 0, 7));
-
         Booking::create([
             'nama' => Auth::user()->name,
             'kursi' => $kursi,
             'status' => 0,
+            'ruangans_id' => $data
         ]);
 
         return redirect('/booking');
@@ -72,6 +69,16 @@ class BookingController extends Controller
         $booking = Booking::find($r->id);
         $booking->update([
             'status' => 1
+        ]);
+
+        return redirect('/booking');
+    }
+
+    public function selesai(Request $r)
+    {
+        $booking = Booking::find($r->id);
+        $booking->update([
+            'status' => 0
         ]);
 
         return redirect('/booking');

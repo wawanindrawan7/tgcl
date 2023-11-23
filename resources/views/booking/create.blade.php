@@ -8,8 +8,7 @@
             @endphp
             @if ($ruangan->booking($cekData) == null)
                 <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-4">
-                    <a href="{{ url('booking', ['kursi' => 'K' . $i, 'data' => Crypt::encrypt($data)]) }}"
-                        style="text-decoration: none">
+                    <a href="{{ url('booking', ['kursi' => 'K' . $i, 'data' => $data]) }}" style="text-decoration: none">
                         {{-- {{ route('pesan', ['kursi' => 'K' . $i, 'data' => Crypt::encrypt($data)]) }} --}}
                         <div class="col-md-12 mb-4 stretch-card transparent">
                             <div class="card card-tale text-center">

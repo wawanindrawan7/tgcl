@@ -161,6 +161,8 @@
     <!-- endinject -->
     <!-- Custom js for this page-->
     <!-- End custom js for this page-->
+
+    @yield('js')
 </body>
 
 </html>

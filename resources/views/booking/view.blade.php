@@ -56,6 +56,51 @@
 
         </div>
     @else
+        @if (Auth::user()->role == 'Admin')
+            <!-- Modal -->
+            <div class="modal fade" id="approveModal" tabindex="-1" role="dialog" aria-labelledby="approveModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="approveModalLabel">Konfirmasi Approve</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Apakah Anda yakin ingin melakukan approve?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                            <a id="approveButton" href="#" class="btn btn-danger">Approve</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="selesaiModal" tabindex="-1" role="dialog" aria-labelledby="approveModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="approveModalLabel">Konfirmasi Selesai</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Apakah Anda yakin ingin melakukan selesai?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                            <a id="selesaiButton" href="#" class="btn btn-danger">Selesai</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endif
+
         <div class="row">
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
@@ -67,6 +112,7 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Nama Yang Booking</th>
+                                        <th>Kursi</th>
                                         <th>Status Booking</th>
                                         @if (Auth::user()->role == 'Admin')
                                             <th>Action</th>
@@ -78,6 +124,7 @@
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $item->nama }}</td>
+                                            <td>{{ $item->kursi }}</td>
                                             <td>
                                                 @if ($item->status == '1')
                                                     <span class="btn btn-success">Berhasil di Booking</span>
@@ -86,10 +133,17 @@
                                                 @endif
                                             </td>
                                             @if (Auth::user()->role == 'Admin')
-                                                <td>
-                                                    <a href="{{ url('booking/approve?id=') . $item->id }}"
-                                                        class="btn btn-danger">Approve</a>
-                                                </td>
+                                                @if ($item->status != 1)
+                                                    <td>
+                                                        <button class="btn btn-danger approveBtn" data-toggle="modal"
+                                                            data-target="#approveModal"
+                                                            data-id="{{ $item->id }}">Approve</button>
+                                                    </td>
+                                                @else
+                                                    <td>
+                                                        <p>Sudah di booking</p>
+                                                    </td>
+                                                @endif
                                             @endif
 
                                         </tr>
@@ -103,4 +157,24 @@
 
         </div>
     @endif
+@endsection
+
+@section('js')
+    <script>
+        $(document).ready(function() {
+            $('.approveBtn').on('click', function() {
+                var bookingId = $(this).data('id');
+                var approveLink = "{{ url('booking/approve?id=') }}" + bookingId;
+                $('#approveButton').attr('href', approveLink);
+            });
+        });
+
+        $(document).ready(function() {
+            $('.selesaiBtn').on('click', function() {
+                var bookingId = $(this).data('id');
+                var approveLink = "{{ url('booking/selesai?id=') }}" + bookingId;
+                $('#selesaiButton').attr('href', approveLink);
+            });
+        });
+    </script>
 @endsection

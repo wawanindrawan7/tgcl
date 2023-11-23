@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Route::get('ruangan', [RuanganController::class, 'view']);
@@ -32,6 +32,7 @@ Route::get('booking/create', [BookingController::class, 'create']);
 Route::post('booking/create', [BookingController::class, 'create']);
 Route::get('booking/delete', [BookingController::class, 'delete']);
 Route::get('booking/approve', [BookingController::class, 'approve']);
+Route::get('booking/selesai', [BookingController::class, 'selesai']);
 Route::get('/booking/{kursi}/{data}', [BookingController::class, 'pesan'])->name('pesan');
 
 
