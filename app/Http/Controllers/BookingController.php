@@ -12,6 +12,12 @@ use Illuminate\Support\Facades\DB;
 
 class BookingController extends Controller
 {
+
+    public function __construct()
+    {
+        return $this->middleware('auth');
+    }
+
     public function view()
     {
         $ruangan = Ruangan::all();

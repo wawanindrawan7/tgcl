@@ -8,6 +8,12 @@ use Illuminate\Support\Facades\Auth;
 
 class RuanganController extends Controller
 {
+
+    public function __construct()
+    {
+        return $this->middleware('auth');
+    }
+
     public function view()
     {
         $ruangan = Ruangan::all();

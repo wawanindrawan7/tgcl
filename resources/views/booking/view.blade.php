@@ -106,17 +106,19 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Ruangan</h4>
-                        <form action="{{ url('nama-booking/cari') }}" method="GET">
-                            <div class="row">
-                                <div class="col-md-11">
-                                    <input type="text" class="form-control" name="cari"
-                                        placeholder="Cari Nama Peminjam .." value="{{ old('cari') }}">
+                        @if (Auth::user()->role == 'Admin')
+                            <form action="{{ url('nama-booking/cari') }}" method="GET">
+                                <div class="row">
+                                    <div class="col-md-11">
+                                        <input type="text" class="form-control" name="cari"
+                                            placeholder="Cari Nama Peminjam .." value="{{ old('cari') }}">
+                                    </div>
+                                    <div class="col-md-1">
+                                        <button class="btn btn-primary" type="submit">Cari</button>
+                                    </div>
                                 </div>
-                                <div class="col-md-1">
-                                    <button class="btn btn-primary" type="submit">Cari</button>
-                                </div>
-                            </div>
-                        </form>
+                            </form>
+                        @endif
                         <div class="table-responsive">
                             <table class="table table-hover">
                                 <thead>
