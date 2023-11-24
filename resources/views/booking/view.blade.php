@@ -3,7 +3,7 @@
     <h2>Booking Ruangan</h2>
     <div class="row">
         @foreach ($ruangan as $item)
-            <div class="col-md-4 mb-4 mb-lg-0 stretch-card transparent">
+            <div class="col-md-4 mb-4 mb-lg-0 mt-4 stretch-card transparent">
                 <div class="card text-center shadow">
                     <div class="card-header">
                         <h3>{{ $item->nama }}</h3>
