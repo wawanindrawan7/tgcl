@@ -34,6 +34,7 @@ Route::get('booking/delete', [BookingController::class, 'delete']);
 Route::get('booking/approve', [BookingController::class, 'approve']);
 Route::get('booking/selesai', [BookingController::class, 'selesai']);
 Route::get('/booking/{kursi}/{data}', [BookingController::class, 'pesan'])->name('pesan');
+Route::get('nama-booking/cari', [BookingController::class, 'cari']);
 
 
 Route::get('history', [BookingController::class, 'history']);

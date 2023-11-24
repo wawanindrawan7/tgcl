@@ -106,6 +106,17 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Ruangan</h4>
+                        <form action="{{ url('nama-booking/cari') }}" method="GET">
+                            <div class="row">
+                                <div class="col-md-11">
+                                    <input type="text" class="form-control" name="cari"
+                                        placeholder="Cari Nama Peminjam .." value="{{ old('cari') }}">
+                                </div>
+                                <div class="col-md-1">
+                                    <button class="btn btn-primary" type="submit">Cari</button>
+                                </div>
+                            </div>
+                        </form>
                         <div class="table-responsive">
                             <table class="table table-hover">
                                 <thead>
@@ -141,7 +152,9 @@
                                                     </td>
                                                 @else
                                                     <td>
-                                                        <p>Sudah di booking</p>
+                                                        <button class="btn btn-primary selesaiBtn" data-toggle="modal"
+                                                            data-target="#selesaiModal"
+                                                            data-id="{{ $item->id }}">Selesai</button>
                                                     </td>
                                                 @endif
                                             @endif
@@ -172,7 +185,7 @@
         $(document).ready(function() {
             $('.selesaiBtn').on('click', function() {
                 var bookingId = $(this).data('id');
-                var approveLink = "{{ url('booking/selesai?id=') }}" + bookingId;
+                var approveLink = "{{ url('booking/delete?id=') }}" + bookingId;
                 $('#selesaiButton').attr('href', approveLink);
             });
         });

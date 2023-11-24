@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Ruangan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RuanganController extends Controller
 {
@@ -23,10 +24,11 @@ class RuanganController extends Controller
                 'jumlah' => $r->jumlah,
                 'jam_mulai' => $r->jam_mulai,
                 'jam_selesai' => $r->jam_selesai,
+                'users_id' => Auth::id(),
             ]);
 
             if ($ruangan) {
-                return redirect()->to('ruangan');
+                return redirect()->to('ruangan')->with(['success' => 'Data Berhasil Disimpan!']);
             }
         }
     }
@@ -41,12 +43,15 @@ class RuanganController extends Controller
             $ruangan = Ruangan::find($r->id);
             $ruangan->update([
                 'nama' => $r->nama,
-                'jumlah' => $r->jumlah
+                'jumlah' => $r->jumlah,
+                'jam_mulai' => $r->jam_mulai,
+                'jam_selesai' => $r->jam_selesai,
+                'users_id' => Auth::id(),
             ]);
 
 
             if ($ruangan) {
-                return redirect()->to('ruangan');
+                return redirect()->to('ruangan')->with(['success' => 'Data Berhasil Diubah!']);
             }
         }
     }
@@ -56,6 +61,6 @@ class RuanganController extends Controller
     {
         $ruangan = Ruangan::find($r->id);
         $ruangan->delete();
-        return redirect()->to('ruangan');
+        return redirect()->to('ruangan')->with(['success' => 'Data Berhasil Dihapus!']);
     }
 }

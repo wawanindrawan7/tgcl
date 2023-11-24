@@ -8,6 +8,7 @@ use App\Models\Ruangan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\DB;
 
 class BookingController extends Controller
 {
@@ -28,27 +29,6 @@ class BookingController extends Controller
             $ruangan = Ruangan::find($r->id);
 
             return view('booking.create', compact('ruangan', 'data'));
-        } else {
-            // Booking::create([
-            //     'nama' => $r->nama,
-            //     'tgl_booking' => $r->tgl_booking,
-            //     'jumlah' => $r->jumlah,
-            //     'mulai' => $r->mulai,
-            //     'selesai' => $r->selesai,
-            //     'ruangan_id' => $r->ruangan_id
-            // ]);
-
-            // History::create([
-            //     'nama' => $r->nama,
-            //     'tgl_booking' => $r->tgl_booking,
-            //     // 'jumlah' => $r->jumlah,
-            //     'mulai' => $r->mulai,
-            //     'selesai' => $r->selesai,
-            //     'ruangan_id' => $r->ruangan_id
-            // ]);
-
-
-            return redirect()->to('booking');
         }
     }
 
@@ -61,7 +41,7 @@ class BookingController extends Controller
             'ruangans_id' => $data
         ]);
 
-        return redirect('/booking');
+        return redirect()->to('booking')->with(['success' => 'Kursi Berhasil Dibooking menunggu approve admin!']);
     }
 
     public function approve(Request $r)
@@ -71,25 +51,17 @@ class BookingController extends Controller
             'status' => 1
         ]);
 
-        return redirect('/booking');
+        return redirect()->to('booking')->with(['success' => 'Kursi Berhasil Dibooking!']);
     }
 
-    public function selesai(Request $r)
-    {
-        $booking = Booking::find($r->id);
-        $booking->update([
-            'status' => 0
-        ]);
 
-        return redirect('/booking');
-    }
 
 
     public function delete(Request $r)
     {
         $booking = Booking::find($r->id);
         $booking->delete();
-        return redirect()->to('booking');
+        return redirect()->to('booking')->with(['success' => 'Kursi selesai digunakan!']);
     }
 
     public function history()
@@ -103,5 +75,20 @@ class BookingController extends Controller
         $h = History::find($r->id);
         $h->delete();
         return redirect()->to('history');
+    }
+
+    public function cari(Request $request)
+    {
+        $ruangan = Ruangan::all();
+        // menangkap data pencarian
+        $cari = $request->cari;
+
+        // mengambil data dari table pegawai sesuai pencarian data
+        $booking = DB::table('bookings')
+            ->where('nama', 'like', "%" . $cari . "%")
+            ->paginate();
+
+        // mengirim data pegawai ke view index
+        return view('booking.view', compact('booking', 'ruangan'));
     }
 }

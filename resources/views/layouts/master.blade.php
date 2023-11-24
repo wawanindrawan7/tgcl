@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="{{ asset('asset/css/vertical-layout-light/style.css') }}">
     <!-- endinject -->
     <link rel="shortcut icon" href="{{ asset('asset/images/favicon.png') }}" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 </head>
 
 <body>
@@ -158,6 +159,19 @@
     <script src="{{ asset('asset/js/template.js') }}"></script>
     <script src="{{ asset('asset/js/settings.js') }}"></script>
     <script src="{{ asset('asset/js/todolist.js') }}"></script>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    <script>
+        //message with toastr
+        @if (session()->has('success'))
+
+            toastr.success('{{ session('success') }}', 'BERHASIL!');
+        @elseif (session()->has('error'))
+
+            toastr.error('{{ session('error') }}', 'GAGAL!');
+        @endif
+    </script>
     <!-- endinject -->
     <!-- Custom js for this page-->
     <!-- End custom js for this page-->

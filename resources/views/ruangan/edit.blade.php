@@ -16,6 +16,15 @@
                             <label>Jumlah Kursi</label>
                             <input type="number" name="jumlah" class="form-control" value="{{ $ruangan->jumlah }}">
                         </div>
+                        <div class="form-group mb-3">
+                            <label>Jam Mulai</label>
+                            <input type="time" name="jam_mulai" value="{{ $ruangan->jam_mulai }}" class="form-control">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label>Jam Selesai</label>
+                            <input type="time" name="jam_selesai" value="{{ $ruangan->jam_selesai }}"
+                                class="form-control">
+                        </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary">Simpan</button>
                         </div>
