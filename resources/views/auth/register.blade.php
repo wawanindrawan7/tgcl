@@ -87,6 +87,10 @@
                                     Already have an account? <a href="{{ url('login') }}"
                                         class="text-primary">Login</a>
                                 </div>
+                                <div class="text-center mt-4 font-weight-light">
+                                    <p>Eksternal Event Reservation</p>
+                                    <p><a href="mailto:feb@unram.ac.id">feb@unram.ac.id</a></p>
+                                </div>
                             </form>
                         </div>
                     </div>
