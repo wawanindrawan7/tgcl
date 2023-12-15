@@ -44,7 +44,7 @@ class BookingController extends Controller
             'nama' => Auth::user()->name,
             'kursi' => $kursi,
             'status' => 0,
-            'ruangans_id' => $data
+            // 'ruangans_id' => $data
         ]);
 
         return redirect()->to('booking')->with(['success' => 'Kursi Berhasil Dibooking menunggu approve admin!']);
