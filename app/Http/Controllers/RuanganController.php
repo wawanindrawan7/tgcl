@@ -30,7 +30,6 @@ class RuanganController extends Controller
                 'jumlah' => $r->jumlah,
                 'jam_mulai' => $r->jam_mulai,
                 'jam_selesai' => $r->jam_selesai,
-                'users_id' => Auth::id(),
             ]);
 
             if ($ruangan) {
