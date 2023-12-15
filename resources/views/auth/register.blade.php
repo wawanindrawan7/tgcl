@@ -29,12 +29,24 @@
                     <div class="col-lg-4 mx-auto">
                         <div class="auth-form-light text-left py-5 px-4 px-sm-5">
                             <div class="brand-logo">
-                                <img src="{{ asset('asset/images/logo.svg') }}" alt="logo">
+                                <h2>TGCL</h2>
                             </div>
                             <h4>New here?</h4>
                             <h6 class="font-weight-light">Signing up is easy. It only takes a few steps</h6>
                             <form method="POST" action="{{ route('register') }}">
                                 @csrf
+                                <div class="form-group">
+                                    <input id="nim" type="text"
+                                        class="form-control @error('nim') is-invalid @enderror" name="nim"
+                                        value="{{ old('nim') }}" required autocomplete="nim" autofocus
+                                        placeholder="Nim">
+
+                                    @error('nim')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
                                 <div class="form-group">
                                     <input id="name" type="text"
                                         class="form-control @error('name') is-invalid @enderror" name="name"
@@ -57,6 +69,19 @@
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="prodi" autocomplete="prodi"
+                                        placeholder="Prodi">
+                                </div>
+                                <div class="form-group">
+                                    <input type="number" class="form-control" name="no_hp" autocomplete="no_hp"
+                                        placeholder="Nomor Hp">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="pekerjaan" autocomplete="pekerjaan"
+                                        placeholder="Pekerjaan">
                                 </div>
                                 <div class="form-group">
                                     <input id="password" type="password"
